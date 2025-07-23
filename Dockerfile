@@ -1,21 +1,27 @@
 # Use official Node image
-FROM node:20-alpine
+FROM node:22-alpine
 
 # Set working directory
 WORKDIR /app
 
-# Copy package.json and install dependencies
+# Update packages
+RUN apk update && apk upgrade
+
+# Copy package files and install dependencies
 COPY package*.json ./
 RUN npm install
 
 # Copy the rest of the code
 COPY . .
 
-# Build the project (if using TypeScript)
+# Build the project (TypeScript → JavaScript)
 RUN npm run build
 
-# Expose port
+# Run tests — if tests fail, the build will stop
+RUN npm run test
+
+# Expose port (optional)
 EXPOSE 3000
 
-# Start the application
+# Start the server only if tests passed
 CMD ["node", "dist/main"]

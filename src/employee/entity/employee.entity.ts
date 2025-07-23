@@ -1,5 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { Qualification } from "../enum/qualification.enum";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Qualification } from '../enum/qualification.enum';
 
 @Entity('employee')
 export class Employee {

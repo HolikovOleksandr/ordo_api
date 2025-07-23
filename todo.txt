@@ -1,0 +1,25 @@
+App
++ .env
++ docker
++ db connection
+? ci
+- cd
+
+
+Employee module
++ Entities
++ CRUD
++ Service logs
++ Controller hhtp errors and exceptions
++ Unit tests
+? Swagger
+
+
+Appointment module
+- Entities
+- Google Calendar API integration
+- CRUD
+- Service logs
+- Controller hhtp errors and exceptions
+- Unit tests
+- Swagger
