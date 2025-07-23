@@ -1,10 +1,10 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { EmployeeService } from './employee.service';
-import { Repository } from 'typeorm';
-import { Employee } from './entity/employee.entity';
-import { getRepositoryToken } from '@nestjs/typeorm';
 import { CreateEmployeeDto } from './dto/create_employee.dto';
 import { Qualification } from './enum/qualification.enum';
+import { Test, TestingModule } from '@nestjs/testing';
+import { EmployeeService } from './employee.service';
+import { getRepositoryToken } from '@nestjs/typeorm';
+import { Employee } from './entity/employee.entity';
+import { Repository } from 'typeorm';
 
 describe('EmployeeService', () => {
   let service: EmployeeService;
@@ -50,12 +50,8 @@ describe('EmployeeService', () => {
   });
 
   it('should throw the error if employee with the same phone number exists', async () => {
-    const existingEmployee = new CreateEmployeeDto();
-    existingEmployee.phoneNumber = '+380123456789';
-    existingEmployee.firstName = 'Joahn';
-    existingEmployee.lastName = 'Doe';
-    existingEmployee.qualification = Qualification.Senior;
-
+    const existingEmployee: Employee = { id: '1', ...mockDto };
+    mockRepository.findOne.mockResolvedValue(existingEmployee);
     mockRepository.findOne.mockResolvedValueOnce(existingEmployee);
     mockRepository.save.mockClear();
 
@@ -79,7 +75,6 @@ describe('EmployeeService', () => {
   it('should find an employee by ID', async () => {
     const employee: Employee = { id: '1', ...mockDto };
     mockRepository.findOne.mockResolvedValue(employee);
-
     await expect(service.findOneById('1')).resolves.toEqual(employee);
   });
 
@@ -91,6 +86,7 @@ describe('EmployeeService', () => {
   it('should update an employee', async () => {
     const updateDto = { firstName: 'Jane' };
     const existingEmployee: Employee = { id: '1', ...mockDto };
+
     mockRepository.findOne.mockResolvedValue(existingEmployee);
     mockRepository.save.mockResolvedValue({ ...existingEmployee, ...updateDto });
 

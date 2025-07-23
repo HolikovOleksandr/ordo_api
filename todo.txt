@@ -2,7 +2,7 @@ App
 + .env
 + docker
 + db connection
-? ci
+- ci
 - cd
 
 
