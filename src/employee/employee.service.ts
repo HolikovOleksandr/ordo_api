@@ -16,7 +16,7 @@ export class EmployeeService {
 
   async create(dto: CreateEmployeeDto): Promise<Employee> {
     const existingPhoneNumber = await this.employeeRepository.findOne({
-      where: { phoneNumber: dto.phoneNumber },
+      where: { phone: dto.phone },
     });
 
     if (existingPhoneNumber) {
@@ -25,7 +25,7 @@ export class EmployeeService {
     }
 
     const employee = this.employeeRepository.create(dto);
-    this.logger.log(`🆕 Creating new employee: ${employee.firstName}`);
+    this.logger.log(`🆕 Creating new employee: ${employee.name}`);
     const savedEmployee = await this.employeeRepository.save(employee);
 
     this.logger.log(`✅ Employee created with ID: ${savedEmployee.id}`);
@@ -48,7 +48,7 @@ export class EmployeeService {
       return null;
     }
 
-    this.logger.log(`👤 Found employee: ${employee.firstName}`);
+    this.logger.log(`👤 Found employee: ${employee.name}`);
     return employee;
   }
 

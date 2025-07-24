@@ -19,9 +19,8 @@ describe('EmployeeService', () => {
   };
 
   const mockDto = new CreateEmployeeDto();
-  mockDto.phoneNumber = '+380123456789';
-  mockDto.firstName = 'John';
-  mockDto.lastName = 'Doe';
+  mockDto.phone = '+380123456789';
+  mockDto.name = 'John';
   mockDto.qualification = Qualification.Middle;
 
   beforeEach(async () => {
@@ -55,7 +54,7 @@ describe('EmployeeService', () => {
     mockRepository.findOne.mockResolvedValueOnce(existingEmployee);
     mockRepository.save.mockClear();
 
-    await expect(service.create(mockDto)).rejects.toThrowError(
+    await expect(service.create(mockDto)).rejects.toThrow(
       'Employee with this phone number already exists',
     );
 
@@ -84,7 +83,7 @@ describe('EmployeeService', () => {
   });
 
   it('should update an employee', async () => {
-    const updateDto = { firstName: 'Jane' };
+    const updateDto = { name: 'Jane' };
     const existingEmployee: Employee = { id: '1', ...mockDto };
 
     mockRepository.findOne.mockResolvedValue(existingEmployee);

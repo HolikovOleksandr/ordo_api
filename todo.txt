@@ -2,9 +2,14 @@ App
 + .env
 + docker
 + db connection
+- environments
+- test db 
 - ci
 - cd
 
+
+IUser interfase
+- roles (Employee/Customer/Admin/God)
 
 Employee module
 + Entities
@@ -12,12 +17,11 @@ Employee module
 + Service logs
 + Controller hhtp errors and exceptions
 + Unit tests
-? Swagger
++ Swagger
 
 
-Appointment module
+Ищщлшт module
 - Entities
-- Google Calendar API integration
 - CRUD
 - Service logs
 - Controller hhtp errors and exceptions
