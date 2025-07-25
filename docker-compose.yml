@@ -24,7 +24,6 @@ services:
   test:
     build:
       context: .
-      target: test
     image: ordo_image_test
     env_file:
       - .env
