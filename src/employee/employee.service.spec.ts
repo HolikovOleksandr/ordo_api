@@ -20,7 +20,6 @@ describe('EmployeeService', () => {
 
   const mockDto = new CreateEmployeeDto();
   mockDto.phone = '+380123456789';
-  mockDto.name = 'John';
   mockDto.qualification = Qualification.Middle;
 
   beforeEach(async () => {

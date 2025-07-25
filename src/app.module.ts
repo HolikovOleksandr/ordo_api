@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EmployeeModule } from './employee/employee.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { SessionModule } from './session/session.module';
 import configuration from './config/configuration';
 
 
@@ -24,7 +23,6 @@ import configuration from './config/configuration';
       }),
     }),
     EmployeeModule,
-    SessionModule,
   ],
 })
 export class AppModule { }

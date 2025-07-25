@@ -5,7 +5,7 @@ import { Qualification } from '../enum/qualification.enum';
 export class CreateEmployeeDto {
   @ApiProperty({ example: 'John', description: 'First name of the employee' })
   @IsString()
-  @Length(1, 100)
+  @Length(1, 50)
   name: string;
 
   @ApiProperty({ example: '+380987654321', description: 'Phone number in international format' })
