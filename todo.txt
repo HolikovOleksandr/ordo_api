@@ -4,12 +4,11 @@ App
 + db connection
 - environments
 - test db 
-- ci
-- cd
++ ci/cd
 
 
 IUser interfase
-- roles (Employee/Customer/Admin/God)
++ roles (Employee/Customer/Admin/God)
 
 Employee module
 + Entities
@@ -20,7 +19,7 @@ Employee module
 + Swagger
 
 
-Ищщлшт module
+Session module
 - Entities
 - CRUD
 - Service logs

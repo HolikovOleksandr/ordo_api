@@ -7,15 +7,15 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_DB: ${DB_NAME}
     ports:
-      - '${DB_PORT}:${DB_PORT}'
+      - '${DB_PORT}:5432'
     volumes:
       - pgdata:/var/lib/postgresql/data
 
   app:
     build: .
-    image: ordo_image
+    image: lesholikov/ordo_api:${IMAGE_TAG:-latest}
     ports:
-      - '${PORT}:${PORT}'
+      - '${PORT}:3000'
     env_file:
       - .env
     depends_on:
@@ -27,8 +27,6 @@ services:
     image: ordo_image_test
     env_file:
       - .env
-    depends_on:
-      - db
     command: ['npm', 'run', 'test']
 
 volumes:
