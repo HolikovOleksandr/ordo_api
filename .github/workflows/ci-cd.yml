@@ -56,7 +56,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_KEY }}
           source: '.env'
-          target: '/home/les/ordo_api/.env'
+          target: '/home/les/ordo_api/'
 
       - name: Upload docker-compose.yml to server
         uses: appleboy/scp-action@v0.1.3
