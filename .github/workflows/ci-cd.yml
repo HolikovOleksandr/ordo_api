@@ -53,7 +53,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_KEY }}
           source: '.env'
-          target: '/path/to/project/.env'
+          target: '/home/les/ordo_api/.env'
 
       - name: Deploy to server
         uses: appleboy/ssh-action@master

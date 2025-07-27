@@ -21,13 +21,5 @@ services:
     depends_on:
       - db
 
-  test:
-    build:
-      context: .
-    image: ordo_image_test
-    env_file:
-      - .env
-    command: ['npm', 'run', 'test']
-
 volumes:
   pgdata:
