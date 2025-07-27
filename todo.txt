@@ -10,7 +10,18 @@ App
 IUser interfase
 + roles (Employee/Customer/Admin/God)
 
+Admin module
+
 Employee module
++ Entities
++ CRUD
++ Service logs
++ Controller hhtp errors and exceptions
++ Unit tests
++ Swagger
+
+
+Custimer module
 + Entities
 + CRUD
 + Service logs

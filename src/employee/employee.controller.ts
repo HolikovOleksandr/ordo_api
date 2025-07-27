@@ -37,9 +37,7 @@ export class EmployeeController {
   @SwaggerResponse({ status: 500, description: 'Failed to create employee' })
   async create(@Body() dto: CreateEmployeeDto): Promise<ApiResponse<Employee>> {
     const employee = await this.employeeService.create(dto);
-    if (!employee) {
-      throw new HttpException('Failed to create employee', 500);
-    }
+    if (!employee) throw new HttpException('Failed to create employee', 500);
 
     return new ApiResponse<Employee>({
       success: true,
