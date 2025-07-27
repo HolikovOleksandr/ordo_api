@@ -19,10 +19,10 @@ import {
   ApiBody,
 } from '@nestjs/swagger';
 import { EmployeeService } from './employee.service';
-import { CreateEmployeeDto } from './dto/create_employee.dto';
-import { UpdateEmployeeDto } from './dto/update_employee.dto';
-import { Employee } from './entity/employee.entity';
+import { UpdateEmployeeDto } from './update_employee.dto';
 import { ApiResponse } from 'src/common/api_response.dto';
+import { CreateEmployeeDto } from './create_employee.dto';
+import { Employee } from './employee.entity';
 
 @ApiTags('employee')
 @Controller('employee')

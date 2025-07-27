@@ -1,6 +1,6 @@
+import { Qualification } from '../common/enums/qualification.enum';
+import { Session } from '../session/session.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { Qualification } from '../enum/qualification.enum';
-import { Session } from 'src/session/session.entity';
 
 @Entity({ name: 'employees' })
 export class Employee {

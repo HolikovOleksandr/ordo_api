@@ -1,8 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { SessionStatus } from './session_status.enum';
+import { SessionStatus } from '../common/enums/session_status.enum';
 import { Customer } from '../customer/customer.entity';
-import { Procedure } from 'src/procedure/procrdure.entity';
-import { Employee } from 'src/employee/entity/employee.entity';
+import { Procedure } from '../procedure/procrdure.entity';
+import { Employee } from '../employee/employee.entity';
 
 @Entity({ name: 'sessions' })
 export class Session {
@@ -13,7 +13,7 @@ export class Session {
   startAt: Date;
 
   @Column({ type: 'enum', enum: SessionStatus })
-  status: SessionStatus;
+  status: SessionStatus = SessionStatus.Pending;
 
   @ManyToOne(() => Procedure, (procedure) => procedure.sessions)
   @JoinColumn({ name: 'procedureId' })

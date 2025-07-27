@@ -1,9 +1,9 @@
 import { ConflictException, Injectable, Logger } from '@nestjs/common';
-import { CreateEmployeeDto } from './dto/create_employee.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Employee } from './entity/employee.entity';
 import { Repository } from 'typeorm';
-import { UpdateEmployeeDto } from './dto/update_employee.dto';
+import { UpdateEmployeeDto } from './update_employee.dto';
+import { Employee } from './employee.entity';
+import { CreateEmployeeDto } from './create_employee.dto';
 
 @Injectable()
 export class EmployeeService {

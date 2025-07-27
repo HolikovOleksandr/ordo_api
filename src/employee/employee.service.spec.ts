@@ -1,14 +1,14 @@
-import { CreateEmployeeDto } from './dto/create_employee.dto';
-import { Qualification } from './enum/qualification.enum';
-import { Test, TestingModule } from '@nestjs/testing';
-import { EmployeeService } from './employee.service';
-import { getRepositoryToken } from '@nestjs/typeorm';
-import { Employee } from './entity/employee.entity';
 import { Repository } from 'typeorm';
+import { EmployeeService } from './employee.service';
+import { CreateEmployeeDto } from './create_employee.dto';
+import { Employee } from './employee.entity';
+import { Test, TestingModule } from '@nestjs/testing';
+import { getRepositoryToken } from '@nestjs/typeorm';
 
 describe('EmployeeService', () => {
   let service: EmployeeService;
   let repository: Repository<Employee>;
+  let mockDto: CreateEmployeeDto;
 
   const mockRepository = {
     create: jest.fn(),
@@ -18,11 +18,13 @@ describe('EmployeeService', () => {
     delete: jest.fn(),
   };
 
-  const mockDto = new CreateEmployeeDto();
-  mockDto.phone = '+380123456789';
-  mockDto.qualification = Qualification.Middle;
-
   beforeEach(async () => {
+    mockDto = new CreateEmployeeDto();
+    mockDto.name = 'John';
+    mockDto.phone = '+380123456789';
+
+    jest.clearAllMocks();
+
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         EmployeeService,
@@ -37,10 +39,12 @@ describe('EmployeeService', () => {
     service = module.get<EmployeeService>(EmployeeService);
   });
 
-  it('should be defined', () => expect(service).toBeDefined());
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
 
   it('should create a new Employee from DTO', async () => {
-    const expectedEmployee: Employee = { id: 'some-uuid', ...mockDto };
+    const expectedEmployee = { id: 'some-uuid', ...mockDto, sessions: [] };
     mockRepository.create.mockReturnValue(expectedEmployee);
     mockRepository.save.mockResolvedValue(expectedEmployee);
 
@@ -48,8 +52,7 @@ describe('EmployeeService', () => {
   });
 
   it('should throw the error if employee with the same phone number exists', async () => {
-    const existingEmployee: Employee = { id: '1', ...mockDto };
-    mockRepository.findOne.mockResolvedValue(existingEmployee);
+    const existingEmployee = { id: '1', ...mockDto, sessions: [] };
     mockRepository.findOne.mockResolvedValueOnce(existingEmployee);
     mockRepository.save.mockClear();
 
@@ -61,9 +64,9 @@ describe('EmployeeService', () => {
   });
 
   it('should find all employees', async () => {
-    const employees: Employee[] = [
-      { id: '1', ...mockDto },
-      { id: '2', ...mockDto },
+    const employees = [
+      { id: '1', ...mockDto, sessions: [] },
+      { id: '2', ...mockDto, sessions: [] },
     ];
 
     mockRepository.find.mockResolvedValue(employees);
@@ -71,7 +74,7 @@ describe('EmployeeService', () => {
   });
 
   it('should find an employee by ID', async () => {
-    const employee: Employee = { id: '1', ...mockDto };
+    const employee = { id: '1', ...mockDto, sessions: [] };
     mockRepository.findOne.mockResolvedValue(employee);
     await expect(service.findOneById('1')).resolves.toEqual(employee);
   });
@@ -83,7 +86,7 @@ describe('EmployeeService', () => {
 
   it('should update an employee', async () => {
     const updateDto = { name: 'Jane' };
-    const existingEmployee: Employee = { id: '1', ...mockDto };
+    const existingEmployee = { id: '1', ...mockDto, sessions: [] };
 
     mockRepository.findOne.mockResolvedValue(existingEmployee);
     mockRepository.save.mockResolvedValue({ ...existingEmployee, ...updateDto });
