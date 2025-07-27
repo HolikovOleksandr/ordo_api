@@ -1,8 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { Qualification } from '../enum/qualification.enum';
+import { Session } from 'src/session/session.entity';
 
-@Entity('employee')
-export class Employee implements IUser {
+@Entity({ name: 'employees' })
+export class Employee {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -18,4 +19,7 @@ export class Employee implements IUser {
     default: Qualification.Junior,
   })
   qualification: Qualification;
+
+  @OneToMany(() => Session, (session) => session.employee)
+  sessions: Session[];
 }
