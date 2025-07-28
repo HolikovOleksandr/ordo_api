@@ -1,4 +1,4 @@
-import { SessionStatus } from 'common/enums/session_status.enum';
+import { SessionStatus } from 'common/enum/session_status.enum';
 import { Customer } from 'customer/customer.entity';
 import { Employee } from 'employee/employee.entity';
 import { Procedure } from 'procedure/procedure.entity';

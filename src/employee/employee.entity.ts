@@ -1,4 +1,4 @@
-import { Qualification } from '../common/enums/qualification.enum';
+import { Qualification } from '../common/enum/qualification.enum';
 import { Session } from '../session/session.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
