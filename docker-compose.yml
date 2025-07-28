@@ -1,5 +1,5 @@
 services:
-  db: 
+  db:
     image: postgres:15-alpine
     restart: always
     environment:
@@ -12,7 +12,6 @@ services:
       - pgdata:/var/lib/postgresql/data
 
   app:
-    build: .
     image: lesholikov/ordo_api:${IMAGE_TAG:-latest}
     ports:
       - '${PORT}:3000'

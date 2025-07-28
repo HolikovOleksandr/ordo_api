@@ -1,5 +1,5 @@
+import { Session } from 'session/session.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { Session } from '../session/session.entity';
 
 @Entity({ name: 'procedures' })
 export class Procedure {

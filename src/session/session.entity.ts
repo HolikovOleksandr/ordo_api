@@ -1,8 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { SessionStatus } from '../common/enums/session_status.enum';
-import { Customer } from '../customer/customer.entity';
-import { Procedure } from '../procedure/procrdure.entity';
-import { Employee } from '../employee/employee.entity';
+import { SessionStatus } from 'common/enums/session_status.enum';
+import { Customer } from 'customer/customer.entity';
+import { Employee } from 'employee/employee.entity';
+import { Procedure } from 'procedure/procedure.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToOne } from 'typeorm';
 
 @Entity({ name: 'sessions' })
 export class Session {
@@ -15,7 +15,7 @@ export class Session {
   @Column({ type: 'enum', enum: SessionStatus })
   status: SessionStatus = SessionStatus.Pending;
 
-  @ManyToOne(() => Procedure, (procedure) => procedure.sessions)
+  @OneToOne(() => Procedure, (procedure) => procedure.sessions)
   @JoinColumn({ name: 'procedureId' })
   procedure: Procedure;
 

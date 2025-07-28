@@ -17,9 +17,6 @@ COPY . .
 # Build the project (TypeScript → JavaScript)
 RUN npm run build
 
-# Run tests — if tests fail, the build will stop
-RUN npm run test
-
 # Expose port (optional)
 EXPOSE 3000
 

@@ -1,10 +1,18 @@
+TASKS QUEUE:
++ fix relations error
++ check spell mistakes in "customer"
+- create customer endpoint
+- create session endpoint
+
+
+ALL TASKS:
 App
 + .env
 + docker
 + db connection
++ ci/cd
 - environments
 - test db 
-+ ci/cd
 
 
 IUser interfase
@@ -21,13 +29,13 @@ Employee module
 + Swagger
 
 
-Custimer module
-+ Entities
-+ CRUD
-+ Service logs
-+ Controller hhtp errors and exceptions
-+ Unit tests
-+ Swagger
+Customer module
+- Entities
+- CRUD
+- Service logs
+- Controller hhtp errors and exceptions
+- Unit tests
+- Swagger
 
 
 Session module
