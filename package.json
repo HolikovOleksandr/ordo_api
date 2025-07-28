@@ -81,7 +81,13 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^common/(.*)$": "<rootDir>/common/$1",
+      "^customer/(.*)$": "<rootDir>/customer/$1",
+      "^employee/(.*)$": "<rootDir>/employee/$1",
+      "^procedure/(.*)$": "<rootDir>/procedure/$1"
+    }
   },
   "main": "index.js"
 }

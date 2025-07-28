@@ -1,6 +1,6 @@
 import { IsString, IsEnum, Length, IsPhoneNumber, IsOptional } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { Qualification } from 'common/enum/qualification.enum';
+import { Qualification } from '../common/enum/qualification.enum';
 
 export class CreateEmployeeDto {
   @ApiProperty({ example: 'Joahn', description: 'First name of the employee' })

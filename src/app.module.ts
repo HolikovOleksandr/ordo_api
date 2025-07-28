@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { EmployeeModule } from 'employee/employee.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import configuration from 'config/configuration';
-import { SessionModule } from 'session/session.module';
-import { CustomerModule } from 'customer/customer.module';
-import { ProcedureModule } from 'procedure/procedure.module';
+import { EmployeeModule } from './employee/employee.module';
+import { SessionModule } from './session/session.module';
+import { CustomerModule } from './customer/customer.module';
+import { ProcedureModule } from './procedure/procedure.module';
+import configuration from './config/configuration';
 
 @Module({
   imports: [

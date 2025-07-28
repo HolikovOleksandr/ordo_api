@@ -22,7 +22,7 @@ import { EmployeeService } from './employee.service';
 import { UpdateEmployeeDto } from './update_employee.dto';
 import { CreateEmployeeDto } from './create_employee.dto';
 import { Employee } from './employee.entity';
-import { ApiResponse } from 'common/dto/api_response.dto';
+import { ApiResponse } from '../common/dto/api_response.dto';
 
 @ApiTags('employee')
 @Controller('employee')
