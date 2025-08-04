@@ -77,7 +77,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             chmod 600 /home/les/ordo_api/.env
-            export IMAGE_TAG=${{ github.sha }}
             cd /home/les/ordo_api
             docker-compose pull
-            docker-compose up -d
+            IMAGE_TAG=${{ github.sha }} docker-compose up -d
