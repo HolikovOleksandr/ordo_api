@@ -1,14 +1,14 @@
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, HttpException, Post } from '@nestjs/common';
+import { ApiResponseDto } from '../common/dto/api_response.dto';
 import { CreateSessionDto } from './create_session.dto';
 import { SessionService } from './sessioin.sevice';
-import { Body, Controller, HttpException, Post } from '@nestjs/common';
 import { Session } from './session.entity';
-import { ApiResponseDto } from '../common/dto/api_response.dto';
 
-@ApiTags('sessions')
+@ApiTags('Sessions')
 @Controller('sessions')
 export class SessionController {
-  constructor(private readonly sessionService: SessionService) {}
+  constructor(private readonly sessionService: SessionService) { }
 
   @Post()
   @ApiOperation({ summary: 'Create a new session' })

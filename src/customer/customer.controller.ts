@@ -1,13 +1,14 @@
 import { Body, Controller, HttpException, Post } from '@nestjs/common';
 import { CustomerService } from './customer.service';
-import { ApiBody, ApiResponse } from '@nestjs/swagger';
+import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateCustomerDto } from './create_customer.dto';
 import { ApiResponseDto } from '../common/dto/api_response.dto';
 import { Customer } from './customer.entity';
 
+@ApiTags('Customers')
 @Controller('customers')
 export class CustomerController {
-  constructor(private readonly customerService: CustomerService) {}
+  constructor(private readonly customerService: CustomerService) { }
 
   @Post()
   @ApiBody({ type: CreateCustomerDto })
