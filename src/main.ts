@@ -17,7 +17,7 @@ async function bootstrap() {
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     origin: (origin, callback) => {
-      const allowedOrigins = ['http://178.151.63.250'];
+      const allowedOrigins = [`http://178.151.63.250:${port}`, 'http://localhost:3000'];
 
       !origin || allowedOrigins.includes(origin)
         ? callback(null, true)
