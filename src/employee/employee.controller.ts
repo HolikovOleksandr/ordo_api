@@ -22,24 +22,24 @@ import { EmployeeService } from './employee.service';
 import { UpdateEmployeeDto } from './update_employee.dto';
 import { CreateEmployeeDto } from './create_employee.dto';
 import { Employee } from './employee.entity';
-import { ApiResponse } from '../common/dto/api_response.dto';
+import { ApiResponseDto } from '../common/dto/api_response.dto';
 
-@ApiTags('employee')
-@Controller('employee')
+@ApiTags('employees')
+@Controller('employees')
 export class EmployeeController {
   constructor(private readonly employeeService: EmployeeService) {}
 
   @Post()
   @ApiOperation({ summary: 'Create a new employee' })
   @ApiBody({ type: CreateEmployeeDto })
-  @SwaggerResponse({ status: 201, description: 'Employee created', type: ApiResponse<Employee> })
+  @SwaggerResponse({ status: 201, description: 'Employee created', type: ApiResponseDto<Employee> })
   @SwaggerResponse({ status: 400, description: 'Invalid data' })
   @SwaggerResponse({ status: 500, description: 'Failed to create employee' })
-  async create(@Body() dto: CreateEmployeeDto): Promise<ApiResponse<Employee>> {
+  async create(@Body() dto: CreateEmployeeDto): Promise<ApiResponseDto<Employee>> {
     const employee = await this.employeeService.create(dto);
     if (!employee) throw new HttpException('Failed to create employee', 500);
 
-    return new ApiResponse<Employee>({
+    return new ApiResponseDto<Employee>({
       success: true,
       data: employee,
       message: 'Employee created successfully',
@@ -51,12 +51,12 @@ export class EmployeeController {
   @SwaggerResponse({
     status: 200,
     description: 'List of employees',
-    type: ApiResponse<Array<Employee>>,
+    type: ApiResponseDto<Array<Employee>>,
   })
-  async findAll(): Promise<ApiResponse<Employee[]>> {
+  async findAll(): Promise<ApiResponseDto<Employee[]>> {
     const employees = await this.employeeService.findAll();
 
-    return new ApiResponse<Employee[]>({
+    return new ApiResponseDto<Employee[]>({
       success: true,
       data: employees,
       message: `${employees.length} Employees found successfully`,
@@ -66,13 +66,13 @@ export class EmployeeController {
   @Get(':id')
   @ApiOperation({ summary: 'Get employee by ID' })
   @ApiParam({ name: 'id', type: 'string', format: 'uuid' })
-  @SwaggerResponse({ status: 200, description: 'Employee found', type: ApiResponse<Employee> })
+  @SwaggerResponse({ status: 200, description: 'Employee found', type: ApiResponseDto<Employee> })
   @SwaggerResponse({ status: 404, description: 'Employee not found' })
-  async findOne(@Param('id', ParseUUIDPipe) id: string): Promise<ApiResponse<Employee>> {
+  async findOne(@Param('id', ParseUUIDPipe) id: string): Promise<ApiResponseDto<Employee>> {
     const employee = await this.employeeService.findOneById(id);
     if (!employee) throw new NotFoundException(`Employee with id ${id} not found`);
 
-    return new ApiResponse<Employee>({
+    return new ApiResponseDto<Employee>({
       success: true,
       data: employee,
       message: 'Employee retrieved successfully',
@@ -83,16 +83,16 @@ export class EmployeeController {
   @ApiOperation({ summary: 'Update employee by ID' })
   @ApiParam({ name: 'id', type: 'string', format: 'uuid' })
   @ApiBody({ type: UpdateEmployeeDto })
-  @SwaggerResponse({ status: 200, description: 'Employee updated', type: ApiResponse<Employee> })
+  @SwaggerResponse({ status: 200, description: 'Employee updated', type: ApiResponseDto<Employee> })
   @SwaggerResponse({ status: 404, description: 'Employee not found' })
   async update(
     @Param('id', ParseUUIDPipe) id: string,
     @Body() dto: UpdateEmployeeDto,
-  ): Promise<ApiResponse<Employee>> {
+  ): Promise<ApiResponseDto<Employee>> {
     const updated = await this.employeeService.update(id, dto);
     if (!updated) throw new NotFoundException(`Employee with id ${id} not found`);
 
-    return new ApiResponse<Employee>({
+    return new ApiResponseDto<Employee>({
       success: true,
       data: updated,
       message: 'Employee updated successfully',

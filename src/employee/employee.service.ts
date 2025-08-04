@@ -1,9 +1,9 @@
 import { ConflictException, Injectable, Logger } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { UpdateEmployeeDto } from './update_employee.dto';
-import { Employee } from './employee.entity';
 import { CreateEmployeeDto } from './create_employee.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Employee } from './employee.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class EmployeeService {
@@ -20,12 +20,12 @@ export class EmployeeService {
     });
 
     if (existingPhoneNumber) {
-      this.logger.error('❌ Employee with this phone number already exists');
+      this.logger.error('📞 Employee with this phone number already exists');
       throw new ConflictException('Employee with this phone number already exists');
     }
 
+    this.logger.log(`🆕 Creating new employee: ${dto.name}`);
     const employee = this.employeeRepository.create(dto);
-    this.logger.log(`🆕 Creating new employee: ${employee.name}`);
     const savedEmployee = await this.employeeRepository.save(employee);
 
     this.logger.log(`✅ Employee created with ID: ${savedEmployee.id}`);

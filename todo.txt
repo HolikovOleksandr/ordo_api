@@ -1,7 +1,7 @@
 TASKS QUEUE:
-- check CD stuff
-- create customer endpoint
++ create customer endpoint
 - create session endpoint
+- check CD stuff
 
 
 ALL TASKS:
