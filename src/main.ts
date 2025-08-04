@@ -36,7 +36,7 @@ async function bootstrap() {
   SwaggerModule.setup('docs', app, documentFactory);
   app.setGlobalPrefix('api');
 
-  await app.listen(port);
+  await app.listen(port, '0.0.0.0');
   Logger.log(`🦾 Server running successfully`, 'Bootstrap');
   Logger.log(`✅ Connecting to database: ${configService.get<string>('db.name')}`, 'Bootstrap');
 }
