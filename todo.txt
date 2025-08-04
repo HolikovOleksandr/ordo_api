@@ -15,10 +15,6 @@ App
 - environments
 - test db 
 
-
-IUser interfase
-+ roles (Employee/Customer/Admin/God)
-
 Admin module
 
 Employee module

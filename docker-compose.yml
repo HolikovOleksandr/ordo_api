@@ -11,7 +11,7 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
-  app:
+  api:
     image: lesholikov/ordo_api:${IMAGE_TAG:-latest}
     ports:
       - '${PORT}:3000'
