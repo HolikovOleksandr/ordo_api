@@ -1,16 +1,29 @@
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Logger, ValidationPipe } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
+  app.enableCors();
 
   const configService = app.get(ConfigService);
   const port = configService.get<number>('port')!;
-  const host = configService.get<string>('host')!;
+
+  app.enableCors({
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    origin: (origin, callback) => {
+      const allowedOrigins = ['http://178.151.63.250'];
+
+      !origin || allowedOrigins.includes(origin)
+        ? callback(null, true)
+        : callback(new Error('Not allowed by CORS'));
+    },
+  });
 
   const config = new DocumentBuilder()
     .setTitle('Ordo API')
@@ -24,8 +37,11 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
 
   await app.listen(port);
-  Logger.log(`🦾 Server was running on http://${host}:${port}`, 'Bootstrap');
+  Logger.log(`🦾 Server running successfully`, 'Bootstrap');
   Logger.log(`✅ Connecting to database: ${configService.get<string>('db.name')}`, 'Bootstrap');
 }
 
-void bootstrap();
+bootstrap().catch((error) => {
+  Logger.error(`❌ Error during bootstrap: ${error.message}`, error.stack, 'Bootstrap');
+  process.exit(1);
+});
